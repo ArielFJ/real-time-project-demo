@@ -1,0 +1,101 @@
+.theater-container {
+    background-color: #222;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .screen-container {
+    position: relative;
+    width: 80vw;
+    height: 50vh;
+    border: 10px solid #000;
+    background-color: #555;
+  }
+  
+  .curtains {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 100%;
+    background-color: #000; /* Adjust color as needed */
+    animation: rollCurtains 5s linear forwards; /* Adjust duration as needed */
+  }
+  
+  @keyframes rollCurtains {
+    0% {
+      width: 0;
+      left: 50%;
+    }
+    100% {
+      width: 50%; /* Adjust the width to create a gap between curtains */
+      left: 25%; /* Adjust the left position to center the gap */
+    }
+  }
+  
+  
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  }
+  
+  
+  .stage {
+    width: 70vw;
+    height: 10vh;
+    background: linear-gradient(to bottom, #2c3e50, #1f2c38);
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.5);
+  }
+  
+  .seats {
+    padding: 10px;
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .seat-row {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .seat {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ecf0f1;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #e74c3c;
+    transition: background-color 0.3s ease;
+  }
+  
+  .seat:hover {
+    background-color: #c0392b;
+  }
+  
+  .exit-door {
+    width: 30px;
+    height: 60px;
+    background-color: #e74c3c; /* Red color for exit door */
+    border: 2px solid #c0392b;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 0px 0px 20px 0px rgba(231, 76, 60, 0.8); /* Adding a subtle shadow for emphasis */
+  }
+  
+  .movie-title {
+    color: #fff; /* Adjust color as needed */
+    font-size: 4rem; /* Adjust font size as needed */
+    text-align: center;
+    margin-bottom: 10px; /* Adjust margin as needed */
+  }
+  
