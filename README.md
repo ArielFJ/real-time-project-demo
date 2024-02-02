@@ -14,9 +14,9 @@ The project follows a modular structure with the following components:
 
 The project utilizes the following technologies:
 
-- **Frontend**: HTML, CSS, JavaScript, and a modern frontend framework, in this case React.
-- **Backend**: Node.js and Express.js, no data is stored for this project.
-- **Real-Time Engine**: WebSockets using Socket.io library.
+- **Frontend**: HTML, CSS, JavaScript, and a modern frontend framework, in this case [React](https://react.dev/).
+- **Backend**: [Node.js](https://nodejs.org/en) and [Express.js](https://expressjs.com/), no data is stored for this project.
+- **Real-Time Engine**: WebSockets using [Socket.io](https://socket.io/) library.
 
 ## Features
 
