@@ -5,10 +5,12 @@ import { Server } from 'socket.io';
 import { initWebSocket } from './websocket.js';
 import userController from './controllers/user.js';
 import movieController from './controllers/movie.js';
+import loggingService from './services/logging/index.js';
 
 const app = express();
 app.use(express.json());
 app.use(cors())
+
 app.use('/users', userController);
 app.use('/movies', movieController);
 
@@ -28,5 +30,5 @@ app.get('/', (req, res) => {
 });
 
 server.listen(3001, () => {
-    console.log('WebSocket server listening on port 3001');
+    loggingService.log('WebSocket server listening on port 3001');
 });
