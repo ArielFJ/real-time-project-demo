@@ -5,26 +5,44 @@ import useLocalStorage from '../../services/useLocalStorage';
 import CredsDisplay from '../../components/CredsDisplay';
 import MovieList from './components/MovieList';
 import { subscribe, unsubscribe } from '../../services/websocket';
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 function Admin() {
     const [user, setUser, removeUser] = useLocalStorage('user', undefined);
     const [movies, setMovies] = useState([]);
-    const { get, post } = useAxios();
+    const { get, post, del } = useAxios();
+    const navigate = useNavigate();
 
     const getAllMovies = async () => {
         const data = await get('/movies')
         setMovies(data);
     }
 
-    const createNewUser = (name, role) => {
-        post('/users', {
-            name,
-            role
-        })
-            .then(({ data }) => {
-                const { data: newUser } = data;
-                setUser(newUser);
-            });
+    const deleteAdmin = async (id) => {
+        console.log('deleting...', id);
+        await del(`/users/${id}`);
+        getAllMovies();
+    }
+
+    const createNewUser = async (name, role) => {
+        await deleteAdmin(user.id);
+        try {
+
+            const { data } = await post('/users', {
+                name,
+                role
+            })
+            setUser(data.data);
+        } catch (err) {
+            const { data } = err.response;
+            if (data.message === 'ADMIN_LIMIT_REACHED' && role === 'admin') {
+                toast.error('Only one admin is allowed', {
+                    theme: 'dark',
+                });
+                navigate('/');
+            }
+        }
     }
 
     const onUserLeftMovie = (data) => getAllMovies();
@@ -44,11 +62,11 @@ function Admin() {
             unsubscribe('user-left-movie');
             unsubscribe('user-joined-movie');
 
+            deleteAdmin(user.id);
             removeUser();
             createNewUser('John Doe', 'user');
         };
     }, [])
-
 
     return (
         <div className="relative">

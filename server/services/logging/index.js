@@ -20,7 +20,7 @@ class LoggingService {
         const logDelayed = () => setTimeout(() => {
             this.logger(`${this.getTimeStamp()} - ${message}`);
             semaphore.leave(); // Release the semaphore
-        }, 1000);
+        }, 2000);
 
         semaphore.take(logDelayed); // Wait for the semaphore
     }

@@ -17,7 +17,6 @@ export async function loader({ params }) {
 }
 
 function Movie() {
-    const [loaded, setLoaded] = useState(false);
     const { movieId } = useLoaderData();
     const [user] = useLocalStorage('user', undefined);
     const Movie = movies[movieId];
@@ -47,13 +46,10 @@ function Movie() {
         emit('select-movie', { type: 'select-movie', payload: { movie: movieId, user } })
 
         return () => {
-            if (loaded) {
-                emit('leave-movie', { type: 'leave-movie', payload: { movie: movieId, user } })
-                unsubscribe('user-left-movie');
-            }
-            setLoaded(true);
+            emit('leave-movie', { type: 'leave-movie', payload: { movie: movieId, user } })
+            unsubscribe('user-left-movie');
         }
-    }, [loaded])
+    }, [])
 
     return (
         <MovieLayout>

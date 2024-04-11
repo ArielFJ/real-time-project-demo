@@ -1,4 +1,4 @@
-# Real-Time Project
+# Cinema SIM: Real-Time Project
 
 This project aims to develop a real-time application that provides live updates and data processing. It will leverage various technologies and frameworks to achieve real-time functionality and deliver a seamless user experience.
 

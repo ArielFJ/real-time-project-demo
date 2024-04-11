@@ -22,8 +22,17 @@ export const useAxios = () => {
         }
     }
 
+    const del = async (url) => {
+        try {
+            return client.delete(url);
+        } catch (error) {
+            console.error("❌ ~ delete ~ error", error)
+        }
+    }
+
     return {
         get,
-        post
+        post,
+        del
     }
 }

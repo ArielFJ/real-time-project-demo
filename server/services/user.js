@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import semaphore from 'semaphore';
 
 class UserService {
     constructor() {
@@ -6,6 +7,12 @@ class UserService {
     }
 
     async create(data) {
+        if (data.role === 'admin') {
+            const admins = await this.getAdmins();
+            if (admins.length >= 1) {
+                throw new Error('ADMIN_LIMIT_REACHED');
+            }
+        }
         const user = new User(data);
         this.users.push(user);
         return user;
@@ -19,8 +26,12 @@ class UserService {
         return this.users.find(user => user.id === id);
     }
 
-    async getAdmin() {
-        return this.users.find(user => user.role === 'admin');
+    async getAdmins() {
+        return this.users.filter(user => user.role === 'admin') || [];
+    }
+
+    async delete(id) {
+        this.users = this.users.filter(user => user.id !== id);
     }
 }
 
